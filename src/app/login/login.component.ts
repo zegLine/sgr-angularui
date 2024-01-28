@@ -3,6 +3,8 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {MatCard, MatCardTitle} from "@angular/material/card";
+import { AuthServiceService } from "../auth-service.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
@@ -19,5 +21,8 @@ import {MatCard, MatCardTitle} from "@angular/material/card";
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
-
+  constructor(private authService: AuthServiceService, private router: Router) {}
+  login() {
+    this.authService.login("zeugen", "xenopower");
+  }
 }
