@@ -5,8 +5,11 @@ import {
   MatTableModule
 } from "@angular/material/table";
 import {DataSource} from "@angular/cdk/collections";
+import {MatIcon} from "@angular/material/icon";
+import {MatIconButton} from "@angular/material/button";
 
 export interface PretGarantie {
+  id: string,
   price: number
   inEffectSince: Date
 }
@@ -15,7 +18,9 @@ export interface PretGarantie {
   selector: 'app-pretgarantie',
   standalone: true,
   imports: [
-    MatTableModule
+    MatTableModule,
+    MatIcon,
+    MatIconButton
   ],
   templateUrl: './pretgarantie.component.html',
   styleUrl: './pretgarantie.component.css'
@@ -24,12 +29,27 @@ export class PretgarantieComponent {
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
 
   constructor(private httpClient: HttpClient) {
-    httpClient.get<PretGarantie[]>('http://localhost:8080/garantie/pret/toate').subscribe({
+    this.queryApiForData();
+  }
+
+  queryApiForData() {
+    this.httpClient.get<PretGarantie[]>('http://localhost:8080/garantie/pret/toate').subscribe({
       next: (response) => {
         this.dataSource.data = response;
       }
     })
   }
 
-  displayedColumns: string[] = ['pret', 'since'];
+  deletePretGarantie(id: string) {
+    console.log('deleting pg' + id);
+
+    this.httpClient.delete('http://localhost:8080/garantie/pret/' + id + '/delete').subscribe(
+      {next: (response) => {
+        console.log(response);
+          this.queryApiForData();
+        }}
+    );
+  }
+
+  displayedColumns: string[] = ['actions', 'pret', 'since'];
 }
