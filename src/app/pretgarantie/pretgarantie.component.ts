@@ -7,6 +7,8 @@ import {
 import {DataSource} from "@angular/cdk/collections";
 import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
+import {ConfirmPopupComponent} from "../confirm-popup/confirm-popup.component";
+import {MatDialog} from "@angular/material/dialog";
 
 export interface PretGarantie {
   id: string,
@@ -28,7 +30,7 @@ export interface PretGarantie {
 export class PretgarantieComponent {
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
 
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private dialog: MatDialog) {
     this.queryApiForData();
   }
 
@@ -40,15 +42,27 @@ export class PretgarantieComponent {
     })
   }
 
-  deletePretGarantie(id: string) {
-    console.log('deleting pg' + id);
 
-    this.httpClient.delete('http://localhost:8080/garantie/pret/' + id + '/delete').subscribe(
-      {next: (response) => {
-        console.log(response);
-          this.queryApiForData();
-        }}
-    );
+  clickDeletePretGarantie(id: string) {
+    const dialogRef = this.dialog.open(ConfirmPopupComponent, {
+      data: {
+        title: "Confirm deletion",
+        message: "Are you sure you want to delete this?",
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      console.log(dialogResult);
+      if (dialogResult) {
+        this.httpClient.delete('http://localhost:8080/garantie/pret/' + id + '/delete').subscribe(
+          {next: (response) => {
+              console.log(response);
+              this.queryApiForData();
+            }}
+        );
+      }
+
+    });
   }
 
   displayedColumns: string[] = ['actions', 'pret', 'since'];
