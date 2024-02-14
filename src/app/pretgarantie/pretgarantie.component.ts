@@ -27,7 +27,6 @@ export class PretgarantieComponent {
     httpClient.get<PretGarantie[]>('http://localhost:8080/garantie/pret/toate').subscribe({
       next: (response) => {
         this.dataSource.data = response;
-        console.log(response);
       }
     })
   }
