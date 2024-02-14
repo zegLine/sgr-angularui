@@ -10,6 +10,8 @@ import {MatIconButton} from "@angular/material/button";
 import {ConfirmPopupComponent} from "../confirm-popup/confirm-popup.component";
 import {MatDialog} from "@angular/material/dialog";
 import {PretGarantie} from "../../models/api/pretgarantie/pretgarantie-api-model";
+import {ApiService} from "../../services/api/api.service";
+import {PretgarantieService} from "../../services/api/pretgarantie/pretgarantie.service";
 
 
 
@@ -27,14 +29,14 @@ import {PretGarantie} from "../../models/api/pretgarantie/pretgarantie-api-model
 export class PretgarantieComponent {
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
 
-  constructor(private httpClient: HttpClient, private dialog: MatDialog) {
+  constructor(private httpClient: HttpClient, private dialog: MatDialog, private pretGarantieService: PretgarantieService) {
     this.queryApiForData();
   }
 
   queryApiForData() {
-    this.httpClient.get<PretGarantie[]>('http://localhost:8080/garantie/pret/toate').subscribe({
+    this.pretGarantieService.getAllPretGarantieItems().subscribe({
       next: (response) => {
-        this.dataSource.data = response;
+        this.dataSource.data = response.body!;
       }
     })
   }
@@ -51,12 +53,9 @@ export class PretgarantieComponent {
     dialogRef.afterClosed().subscribe(dialogResult => {
       console.log(dialogResult);
       if (dialogResult) {
-        this.httpClient.delete('http://localhost:8080/garantie/pret/' + id + '/delete').subscribe(
-          {next: (response) => {
-              console.log(response);
-              this.queryApiForData();
-            }}
-        );
+        this.pretGarantieService.deletePretGarantie(id).subscribe({next: ()=> {
+            this.queryApiForData();
+          }});
       }
 
     });
