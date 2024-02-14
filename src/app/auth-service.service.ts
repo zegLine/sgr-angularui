@@ -3,13 +3,14 @@ import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
 import { ApiAuthResponse } from "./api-auth-response";
 import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
+import {Router} from "@angular/router";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthServiceService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:HttpClient, private router:Router) { }
 
   login(username: string, password: string): Promise<boolean> {
     return new Promise((resolve, reject) => {
@@ -52,5 +53,6 @@ export class AuthServiceService {
 
   logOut() {
     localStorage.removeItem('session_token');
+    this.router.navigate(["/"]);
   }
 }
