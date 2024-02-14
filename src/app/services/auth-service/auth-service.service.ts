@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {environment} from "../environments/environment";
-import {ApiAuthResponse} from "./api-auth-response";
+import {environment} from "../../../environments/environment";
+import {ApiAuthResponse} from "../../api-auth-response";
 import {Router} from "@angular/router";
 
 @Injectable({

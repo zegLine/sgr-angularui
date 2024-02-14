@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import {MatButton} from "@angular/material/button";
 import {MatToolbar} from "@angular/material/toolbar";
 import {RouterLink} from "@angular/router";
-import {AuthServiceService} from "../auth-service.service";
+import {AuthServiceService} from "../../services/auth-service/auth-service.service";
 import {NgIf} from "@angular/common";
 
 @Component({

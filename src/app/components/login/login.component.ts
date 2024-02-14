@@ -3,7 +3,7 @@ import {MatFormField, MatLabel} from "@angular/material/form-field";
 import {MatInput} from "@angular/material/input";
 import {MatButton} from "@angular/material/button";
 import {MatCard, MatCardTitle} from "@angular/material/card";
-import { AuthServiceService } from "../auth-service.service";
+import { AuthServiceService } from "../../services/auth-service/auth-service.service";
 import {Router} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
