@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../environments/environment";
-import { ApiAuthResponse } from "./api-auth-response";
-import {log} from "@angular-devkit/build-angular/src/builders/ssr-dev-server";
+import {ApiAuthResponse} from "./api-auth-response";
 import {Router} from "@angular/router";
 
 @Injectable({
@@ -35,6 +34,13 @@ export class AuthServiceService {
 
   private setSession(authResult: ApiAuthResponse) {
     localStorage.setItem('session_token', authResult.tokenOptional);
+  }
+
+  getAuthorizationToken(): string {
+    if (!this.isLoggedIn()) {
+      this.router.navigate(['login']);
+    }
+    return 'Bearer ' + localStorage.getItem('session_token')!;
   }
 
   isLoggedIn(): boolean {
