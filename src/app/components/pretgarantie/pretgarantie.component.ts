@@ -9,12 +9,9 @@ import {MatIcon} from "@angular/material/icon";
 import {MatIconButton} from "@angular/material/button";
 import {ConfirmPopupComponent} from "../confirm-popup/confirm-popup.component";
 import {MatDialog} from "@angular/material/dialog";
+import {PretGarantie} from "../../models/api/pretgarantie/pretgarantie-api-model";
 
-export interface PretGarantie {
-  id: string,
-  price: number
-  inEffectSince: Date
-}
+
 
 @Component({
   selector: 'app-pretgarantie',
