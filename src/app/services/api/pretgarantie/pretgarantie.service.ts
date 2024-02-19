@@ -13,20 +13,21 @@ export class PretgarantieService {
   constructor(private apiService: ApiService) {}
 
   createPretGarantie(price: number): Observable<HttpResponse<PretGarantie>> {
-    const body = { price };
-    const headers = {}; // You can add headers if needed
-    return this.apiService.callApi(`${this.baseUrl}/nou`, 'POST', body, headers);
+    const params = {
+      price: price
+    }
+    return this.apiService.callApi(`${this.baseUrl}/nou`, 'POST', null, null, params);
   }
 
   getAllPretGarantieItems(): Observable<HttpResponse<PretGarantie[]>> {
-    return this.apiService.callApi(`${this.baseUrl}/toate`, 'GET', null, null);
+    return this.apiService.callApi(`${this.baseUrl}/toate`, 'GET', null, null, null);
   }
 
   deletePretGarantie(id: string): Observable<HttpResponse<number>> {
-    return this.apiService.callApi(`${this.baseUrl}/${id}/delete`, 'DELETE', null, null);
+    return this.apiService.callApi(`${this.baseUrl}/${id}/delete`, 'DELETE', null, null, null);
   }
 
   getLatestPretGarantie(): Observable<HttpResponse<PretGarantie>> {
-    return this.apiService.callApi(`${this.baseUrl}/curent`, 'GET', null, null);
+    return this.apiService.callApi(`${this.baseUrl}/curent`, 'GET', null, null, null);
   }
 }

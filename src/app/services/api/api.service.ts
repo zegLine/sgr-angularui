@@ -12,9 +12,10 @@ export class ApiService {
   constructor (private httpClient: HttpClient) {
   }
 
-  public callApi(endpoint: string, method: string, body: any, headers: any): Observable<HttpResponse<any>> {
+  public callApi(endpoint: string, method: string, body: any, headers: any, params: any): Observable<HttpResponse<any>> {
     let options = {
       body: body,
+      params: params,
       headers: new HttpHeaders(headers),
       observe: 'response' as const // This will return the full HttpResponse
     };
