@@ -1,1 +1,7 @@
-<p>pretgarantienou works!</p>
+<h1>Adauga pret garantie</h1>
+<mat-form-field>
+  <mat-label>Valoare Pret Garantie</mat-label>
+  <input matInput [(ngModel)]="valoare" type="number" step="0.1">
+  <span matTextPrefix>RON&nbsp;</span>
+</mat-form-field>
+<button mat-raised-button (click)="createPretGarante()">Adauga</button>
