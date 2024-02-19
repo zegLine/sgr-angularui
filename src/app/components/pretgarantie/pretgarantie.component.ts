@@ -6,12 +6,13 @@ import {
 } from "@angular/material/table";
 import {DataSource} from "@angular/cdk/collections";
 import {MatIcon} from "@angular/material/icon";
-import {MatIconButton} from "@angular/material/button";
+import {MatFabButton, MatIconButton} from "@angular/material/button";
 import {ConfirmPopupComponent} from "../confirm-popup/confirm-popup.component";
 import {MatDialog} from "@angular/material/dialog";
 import {PretGarantie} from "../../models/api/pretgarantie/pretgarantie-api-model";
 import {ApiService} from "../../services/api/api.service";
 import {PretgarantieService} from "../../services/api/pretgarantie/pretgarantie.service";
+import {RouterLink} from "@angular/router";
 
 
 
@@ -21,7 +22,9 @@ import {PretgarantieService} from "../../services/api/pretgarantie/pretgarantie.
   imports: [
     MatTableModule,
     MatIcon,
-    MatIconButton
+    MatIconButton,
+    MatFabButton,
+    RouterLink
   ],
   templateUrl: './pretgarantie.component.html',
   styleUrl: './pretgarantie.component.css'
