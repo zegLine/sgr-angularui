@@ -62,7 +62,7 @@ export class StoreComponent implements OnInit, AfterViewInit{
 
   refreshDataSource() {
     this.route.queryParams.subscribe({next: (params) => {
-        this.storeService.getAllStoreItems(params['pageSize'], params['pageIndex']).subscribe({
+        this.storeService.getAllStoreItems(params['pageSize'] || 5, params['pageIndex'] || 0).subscribe({
           next: (response) => {
             this.dataSource.data = response.body!.content;
             this.paginator.length = response.body!.totalElements;
