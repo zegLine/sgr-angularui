@@ -5,6 +5,7 @@ import {LogoutComponent} from "./components/logout/logout.component";
 import {PretgarantieComponent} from "./components/pretgarantie/pretgarantie.component";
 import {PretgarantienouComponent} from "./components/pretgarantienou/pretgarantienou.component";
 import {StoreComponent} from "./components/store/store.component";
+import {StorenouComponent} from "./components/storenou/storenou.component";
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -13,5 +14,6 @@ export const routes: Routes = [
   {path: 'garantie/pret', component: PretgarantieComponent},
   {path: 'garantie/pret/nou', component: PretgarantienouComponent},
   {path: 'store', component: StoreComponent},
+  {path: 'store/nou', component: StorenouComponent},
   {path: '', redirectTo: '/start', pathMatch: "full"}
 ];

@@ -1,0 +1,10 @@
+<h1>Adauga magazin nou</h1>
+<mat-form-field>
+  <mat-label>Nume magazin</mat-label>
+  <input matInput [(ngModel)]="store_name" type="text">
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Descriere magazin</mat-label>
+  <input matInput [(ngModel)]="store_description" type="text">
+</mat-form-field>
+<button mat-raised-button (click)="createStore()">Adauga</button>
