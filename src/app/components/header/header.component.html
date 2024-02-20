@@ -1,6 +1,7 @@
 <mat-toolbar>
   <button mat-button routerLink="/start" style="margin-right: 20px;">Sistemul pentru Garantie - Returnare (SGR)</button>
   <button *ngIf="(authService.isLoggedIn())" mat-button routerLink="/garantie/pret">Pret Garantie</button>
+  <button *ngIf="(authService.isLoggedIn())" mat-button routerLink="/store">Magazine</button>
   <span class="header-spacer"></span>
   <button *ngIf="!(authService.isLoggedIn())" mat-button routerLink="/login">Login</button>
   <button *ngIf="(authService.isLoggedIn())" mat-button routerLink="/logout">Logout</button>
