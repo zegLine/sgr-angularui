@@ -7,4 +7,6 @@
   <mat-label>Descriere magazin</mat-label>
   <input matInput [(ngModel)]="store_description" type="text">
 </mat-form-field>
-<button mat-raised-button (click)="createStore()">Adauga</button>
+<button mat-raised-button (click)="createStore(false)">Adauga si ramai</button>
+<button mat-raised-button (click)="createStore(true)">Adauga si inapoi</button>
+

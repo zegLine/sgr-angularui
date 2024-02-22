@@ -4,4 +4,5 @@
   <input matInput [(ngModel)]="valoare" type="number" step="0.1">
   <span matTextPrefix>RON&nbsp;</span>
 </mat-form-field>
-<button mat-raised-button (click)="createPretGarante()">Adauga</button>
+<button mat-raised-button (click)="createPretGarante(false)">Adauga si ramai</button>
+<button mat-raised-button (click)="createPretGarante(true)">Adauga si inapoi</button>
