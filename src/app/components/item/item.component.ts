@@ -15,6 +15,7 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {StoreService} from "../../services/api/store/store.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ItemService} from "../../services/api/item/item.service";
+import {ConfirmPopupComponent} from "../confirm-popup/confirm-popup.component";
 
 @Component({
   selector: 'app-item',
@@ -73,6 +74,20 @@ export class ItemComponent implements OnInit, AfterViewInit {
   }
 
   clickDeleteItem(itemId: string) {
+    const dialogRef = this.dialog.open(ConfirmPopupComponent, {
+      data: {
+        title: "Confirm deletion",
+        message: "Are you sure you want to delete the item?",
+      }
+    });
 
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.itemService.deleteItem(itemId).subscribe({next: ()=> {
+            this.refreshDataSource();
+          }});
+      }
+
+    });
   }
 }
