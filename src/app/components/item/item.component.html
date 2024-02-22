@@ -18,12 +18,12 @@
 
   <ng-container matColumnDef="name">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by name"> Item name </th>
-    <td mat-cell *matCellDef="let element"> {{element.item_name}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.itemName}} </td>
   </ng-container>
 
   <ng-container matColumnDef="weight">
     <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by weight"> Weight (kg) </th>
-    <td mat-cell *matCellDef="let element"> {{element.item_weight_kg}} </td>
+    <td mat-cell *matCellDef="let element"> {{element.itemWeightKg}} </td>
   </ng-container>
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
