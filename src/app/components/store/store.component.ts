@@ -14,6 +14,9 @@ import {ActivatedRoute, Router, RouterLink} from "@angular/router";
 import {MatPaginator, MatPaginatorIntl, MatPaginatorModule} from "@angular/material/paginator";
 import {startWith, switchMap} from "rxjs";
 import {StoreService} from "../../services/api/store/store.service";
+import {ConfirmPopupComponent} from "../confirm-popup/confirm-popup.component";
+import {Dialog} from "@angular/cdk/dialog";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-store',
@@ -43,7 +46,7 @@ export class StoreComponent implements OnInit, AfterViewInit{
   displayedColumns: string[] = ['actions', 'id', 'name', 'descriere'];
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);
 
-  constructor(private storeService: StoreService, private router: Router, private route: ActivatedRoute) {
+  constructor(protected storeService: StoreService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
   }
 
   ngOnInit() {
@@ -69,5 +72,23 @@ export class StoreComponent implements OnInit, AfterViewInit{
           }
         });
       }});
+  }
+
+  clickDeleteStore(storeId: string) {
+    const dialogRef = this.dialog.open(ConfirmPopupComponent, {
+      data: {
+        title: "Confirm deletion",
+        message: "Are you sure you want to delete the store?",
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        this.storeService.deleteStore(storeId).subscribe({next: ()=> {
+            this.refreshDataSource();
+          }});
+      }
+
+    });
   }
 }

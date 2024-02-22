@@ -29,4 +29,7 @@ export class StoreService {
     return this.apiService.callApi(`${this.baseUrl}/toate`, 'GET', null, null, params);
   }
 
+  deleteStore(storeId: string): Observable<HttpResponse<string>> {
+    return this.apiService.callApi(`${this.baseUrl}/${storeId}/delete`, 'DELETE', null, null, null);
+  }
 }
