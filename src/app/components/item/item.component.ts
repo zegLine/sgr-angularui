@@ -16,6 +16,7 @@ import {StoreService} from "../../services/api/store/store.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ItemService} from "../../services/api/item/item.service";
 import {ConfirmPopupComponent} from "../confirm-popup/confirm-popup.component";
+import {MatSort, MatSortHeader, Sort} from "@angular/material/sort";
 
 @Component({
   selector: 'app-item',
@@ -35,7 +36,9 @@ import {ConfirmPopupComponent} from "../confirm-popup/confirm-popup.component";
     MatRowDef,
     MatTable,
     RouterLink,
-    MatHeaderCellDef
+    MatHeaderCellDef,
+    MatSort,
+    MatSortHeader
   ],
   templateUrl: './item.component.html',
   styleUrl: './item.component.css'
@@ -60,6 +63,10 @@ export class ItemComponent implements OnInit, AfterViewInit {
         queryParams: { pageIndex: this.paginator.pageIndex, pageSize: this.paginator.pageSize },
       });
     });
+  }
+
+  sortChange(sortEvent: Sort) {
+    console.log(sortEvent.active + ' ' + sortEvent.direction);
   }
 
   refreshDataSource() {
