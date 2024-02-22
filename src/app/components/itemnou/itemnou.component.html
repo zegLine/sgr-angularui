@@ -1,1 +1,14 @@
-<p>itemnou works!</p>
+<h1>Adauga produs nou</h1>
+<mat-form-field>
+  <mat-label>Nume produs</mat-label>
+  <input matInput [(ngModel)]="item_name" type="text">
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Greutate (in kg)</mat-label>
+  <input matInput [(ngModel)]="item_weight_kg" type="number" step="0.1">
+  <span matTextSuffix> kg</span>
+
+</mat-form-field>
+<button mat-raised-button (click)="createItem(false)">Adauga si ramai</button>
+<button mat-raised-button (click)="createItem(true)">Adauga si inapoi</button>
+

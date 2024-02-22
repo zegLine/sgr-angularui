@@ -15,10 +15,10 @@ export class ItemService {
 
   constructor(private apiService: ApiService) {}
 
-  createItem(name: string, desc: string): Observable<HttpResponse<ItemApiModel>> {
+  createItem(name: string, weight: number): Observable<HttpResponse<ItemApiModel>> {
     const body = {
-      store_name: name,
-      store_desc: desc
+      name: name,
+      weight: weight
     }
     return this.apiService.callApi(`${this.baseUrl}/nou`, 'POST', body, null, null);
   }
