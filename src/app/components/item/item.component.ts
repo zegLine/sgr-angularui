@@ -45,7 +45,9 @@ import {MatSort, MatSortHeader, Sort} from "@angular/material/sort";
 })
 export class ItemComponent implements OnInit, AfterViewInit {
   dataSource: MatTableDataSource<any> = new MatTableDataSource<any>();
-  displayedColumns: string[] = ['actions', 'id', 'name', 'weight'];
+  displayedColumns: string[] = ['actions', 'id', 'itemName', 'itemWeightKg'];
+  sortingColumn: string = "";
+  sortingDirection: string = "";
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);
 
   constructor(protected itemService: ItemService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
@@ -67,11 +69,16 @@ export class ItemComponent implements OnInit, AfterViewInit {
 
   sortChange(sortEvent: Sort) {
     console.log(sortEvent.active + ' ' + sortEvent.direction);
+    this.sortingColumn = sortEvent.active;
+    this.sortingDirection = sortEvent.direction;
+    this.refreshDataSource();
   }
 
   refreshDataSource() {
     this.route.queryParams.subscribe({next: (params) => {
-        this.itemService.getAllItems(params['pageSize'] || 5, params['pageIndex'] || 0).subscribe({
+        const sortingColumn = this.sortingColumn ? this.sortingColumn : undefined;
+        const sortingDirection = this.sortingDirection ? this.sortingDirection : undefined;
+        this.itemService.getAllItems(params['pageSize'] || 5, params['pageIndex'] || 0, sortingColumn, sortingDirection).subscribe({
           next: (response) => {
             this.dataSource.data = response.body!.content;
             this.paginator.length = response.body!.totalElements;

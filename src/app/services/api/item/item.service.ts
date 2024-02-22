@@ -23,10 +23,12 @@ export class ItemService {
     return this.apiService.callApi(`${this.baseUrl}/nou`, 'POST', body, null, null);
   }
 
-  getAllItems(pageSize: number, pageNumber: number): Observable<HttpResponse<ItemPageApiModel>> {
+  getAllItems(pageSize: number, pageNumber: number, sortingColumn?: string, sortingDirection?: string): Observable<HttpResponse<ItemPageApiModel>> {
     const params = {
       pageNumber: pageNumber,
-      pageSize: pageSize
+      pageSize: pageSize,
+      ...(sortingColumn && { sortingColumn }),
+      ...(sortingDirection && { sortingDirection })
     }
     return this.apiService.callApi(`${this.baseUrl}/toate`, 'GET', null, null, params);
   }
