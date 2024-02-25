@@ -41,14 +41,13 @@ import {SGRFilterSelected} from "../../models/filter/filter_selected";
 export class FilterBoxComponent {
   filters!: SGRFilter[];
   filtersSelected: SGRFilterSelected[] = [];
-  constructor(public dialogRef: MatDialogRef<FilterBoxComponent>, @Inject(MAT_DIALOG_DATA) public data: SGRFilter[]) {
-    this.filters = data;
-    this.initializeFiltersSelected();
+  constructor(public dialogRef: MatDialogRef<FilterBoxComponent>, @Inject(MAT_DIALOG_DATA) public data: FilterBoxDialogData) {
+    this.filters = data.filters;
+    this.initializeFiltersSelected(data.filtersSelected);
   }
 
   onConfirm() {
-    console.log(this.filtersSelected);
-    this.dialogRef.close(true);
+    this.dialogRef.close(this.filtersSelected);
   }
 
   onDismiss() {
@@ -57,11 +56,24 @@ export class FilterBoxComponent {
 
   protected readonly SGRFiterType = SGRFiterType;
 
-  initializeFiltersSelected() {
-    this.filtersSelected = this.filters.map(filter => ({
-      filter: filter,
-      predicate: filter.filter_type === SGRFiterType.NUMERIC ? NumericFilterPredicates.GREATER_THAN : StringFilterPredicates.CONTAINS,
-      value: ''
-    }));
+  initializeFiltersSelected(filtersSelectedAlready: SGRFilterSelected[]) {
+    this.filtersSelected = this.filters.map((filter, index) => {
+      const existingFilter = filtersSelectedAlready.find(selected => selected.filter.column_name === filter.column_name);
+      if (existingFilter) {
+        return existingFilter; // Use existing filter if found
+      } else {
+        // Create a new filter selection if not found
+        return {
+          filter: filter,
+          predicate: filter.filter_type === SGRFiterType.NUMERIC ? NumericFilterPredicates.GREATER_THAN : StringFilterPredicates.CONTAINS,
+          value: ''
+        };
+      }
+    });
+  }
+}
+
+export class FilterBoxDialogData {
+  constructor(public filters: SGRFilter[], public filtersSelected: SGRFilterSelected[]) {
   }
 }

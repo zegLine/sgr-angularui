@@ -24,6 +24,7 @@ import {SGRFilter} from "../../models/filter/filter_model";
 import {SGRFiterType} from "../../models/filter/filter_type";
 import {FilterBoxComponent} from "../filter-box/filter-box.component";
 import {filter} from "rxjs";
+import {SGRFilterSelected} from "../../models/filter/filter_selected";
 
 @Component({
   selector: 'app-item',
@@ -59,6 +60,7 @@ export class ItemComponent implements OnInit, AfterViewInit {
   filters: SGRFilter[] = [{column_name: "id", filter_type: SGRFiterType.STRING},
                           {column_name: "itemName", filter_type: SGRFiterType.STRING},
                           {column_name: "itemWeightKg", filter_type: SGRFiterType.NUMERIC}];
+  filtersSelected: SGRFilterSelected[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);
 
@@ -119,12 +121,33 @@ export class ItemComponent implements OnInit, AfterViewInit {
 
   openFilters() {
     const dialogFilters = this.dialog.open(FilterBoxComponent, {
-      data: this.filters
+      data: {
+        filters: this.filters,
+        filtersSelected: this.filtersSelected
+      }
     });
 
-    dialogFilters.afterClosed().subscribe(dialogResult => {
+    dialogFilters.afterClosed().subscribe((dialogResult: SGRFilterSelected[] | false) => {
+      // the result can be false if the user clicked on the 'close' button
       if (dialogResult) {
-        console.log("filters set");
+        console.log("items filters set");
+
+        // dialogResult is of type FilterSelected from now on, since it is not false
+
+        this.filtersSelected = [];
+        // Loop through each filter in dialogResult and add to filtersSelected if predicate is not 0
+        dialogResult.forEach((filter, index: number) => {
+          if (filter.predicate !== 0) {
+            this.filtersSelected.push({
+              filter: this.filters[index],
+              predicate: filter.predicate,
+              value: filter.value
+            });
+          }
+        });
+        console.log("SELECTED FILTERS: ");
+        console.log(this.filtersSelected);
+
       }
     })
   }
