@@ -3,20 +3,27 @@ import {
   MatCell,
   MatCellDef,
   MatColumnDef,
-  MatHeaderCell, MatHeaderCellDef,
+  MatHeaderCell,
+  MatHeaderCellDef,
   MatHeaderRow,
   MatHeaderRowDef,
-  MatRow, MatRowDef, MatTable, MatTableDataSource
+  MatRow,
+  MatRowDef,
+  MatTable,
+  MatTableDataSource
 } from "@angular/material/table";
 import {MatFabButton, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {MatPaginator, MatPaginatorIntl} from "@angular/material/paginator";
 import {ActivatedRoute, Router, RouterLink} from "@angular/router";
-import {StoreService} from "../../services/api/store/store.service";
 import {MatDialog} from "@angular/material/dialog";
 import {ItemService} from "../../services/api/item/item.service";
 import {ConfirmPopupComponent} from "../confirm-popup/confirm-popup.component";
 import {MatSort, MatSortHeader, Sort} from "@angular/material/sort";
+import {SGRFilter} from "../../models/filter/filter_model";
+import {SGRFiterType} from "../../models/filter/filter_type";
+import {FilterBoxComponent} from "../filter-box/filter-box.component";
+import {filter} from "rxjs";
 
 @Component({
   selector: 'app-item',
@@ -48,6 +55,11 @@ export class ItemComponent implements OnInit, AfterViewInit {
   displayedColumns: string[] = ['actions', 'id', 'itemName', 'itemWeightKg'];
   sortingColumn: string = "";
   sortingDirection: string = "";
+
+  filters: SGRFilter[] = [{column_name: "id", filter_type: SGRFiterType.STRING},
+                          {column_name: "itemName", filter_type: SGRFiterType.STRING},
+                          {column_name: "itemWeightKg", filter_type: SGRFiterType.NUMERIC}];
+
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);
 
   constructor(protected itemService: ItemService, private router: Router, private route: ActivatedRoute, private dialog: MatDialog) {
@@ -103,5 +115,17 @@ export class ItemComponent implements OnInit, AfterViewInit {
       }
 
     });
+  }
+
+  openFilters() {
+    const dialogFilters = this.dialog.open(FilterBoxComponent, {
+      data: this.filters
+    });
+
+    dialogFilters.afterClosed().subscribe(dialogResult => {
+      if (dialogResult) {
+        console.log("filters set");
+      }
+    })
   }
 }
