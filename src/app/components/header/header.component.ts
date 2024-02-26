@@ -1,9 +1,11 @@
 import { Component } from '@angular/core';
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatToolbar} from "@angular/material/toolbar";
 import {RouterLink} from "@angular/router";
 import {AuthServiceService} from "../../services/auth-service/auth-service.service";
 import {NgIf} from "@angular/common";
+import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
+import {MatIconModule} from "@angular/material/icon";
 
 @Component({
   selector: 'app-header',
@@ -12,7 +14,11 @@ import {NgIf} from "@angular/common";
     MatButton,
     MatToolbar,
     RouterLink,
-    NgIf
+    NgIf,
+    MatMenu,
+    MatIconButton,
+    MatMenuTrigger,
+    MatIconModule
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'

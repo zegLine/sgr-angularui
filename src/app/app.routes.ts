@@ -9,6 +9,8 @@ import {StorenouComponent} from "./components/storenou/storenou.component";
 import {PurchaseComponent} from "./components/purchase/purchase.component";
 import {ItemComponent} from "./components/item/item.component";
 import {ItemnouComponent} from "./components/itemnou/itemnou.component";
+import {UsersComponent} from "./components/users/users.component";
+import {UsernouComponent} from "./components/usernou/usernou.component";
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -21,5 +23,7 @@ export const routes: Routes = [
   {path: 'purchase', component: PurchaseComponent},
   {path: 'item', component: ItemComponent},
   {path: 'item/nou', component: ItemnouComponent},
+  {path: 'user', component: UsersComponent},
+  {path: 'user/nou', component: UsernouComponent},
   {path: '', redirectTo: '/start', pathMatch: "full"}
 ];

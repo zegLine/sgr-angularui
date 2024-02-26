@@ -4,6 +4,13 @@
   <button *ngIf="(authService.isLoggedIn())" mat-button routerLink="/store">Magazine</button>
   <button *ngIf="(authService.isLoggedIn())" mat-button routerLink="/item">Produse</button>
   <button *ngIf="(authService.isLoggedIn())" mat-button routerLink="/purchase">Achizitii SGR</button>
+  <mat-menu #managementMenu="matMenu">
+    <button *ngIf="(authService.isLoggedIn())" mat-button routerLink="/user">Utilizatori SGR</button>
+  </mat-menu>
+  <button *ngIf="(authService.isLoggedIn())" mat-button [matMenuTriggerFor]="managementMenu">
+    Management SGR
+    <mat-icon>arrow_drop_down</mat-icon>
+  </button>
   <span class="header-spacer"></span>
   <button *ngIf="!(authService.isLoggedIn())" mat-button routerLink="/login">Login</button>
   <button *ngIf="(authService.isLoggedIn())" mat-button routerLink="/logout">Logout</button>
