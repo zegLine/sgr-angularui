@@ -92,7 +92,7 @@ export class ItemComponent implements OnInit, AfterViewInit {
     this.route.queryParams.subscribe({next: (params) => {
         const sortingColumn = this.sortingColumn ? this.sortingColumn : undefined;
         const sortingDirection = this.sortingDirection ? this.sortingDirection : undefined;
-        this.itemService.getAllItems(params['pageSize'] || 5, params['pageIndex'] || 0, sortingColumn, sortingDirection).subscribe({
+        this.itemService.getAllItems(params['pageSize'] || 5, params['pageIndex'] || 0, sortingColumn , sortingDirection, this.filtersSelected).subscribe({
           next: (response) => {
             this.dataSource.data = response.body!.content;
             this.paginator.length = response.body!.totalElements;
@@ -130,14 +130,12 @@ export class ItemComponent implements OnInit, AfterViewInit {
     dialogFilters.afterClosed().subscribe((dialogResult: SGRFilterSelected[] | false) => {
       // the result can be false if the user clicked on the 'close' button
       if (dialogResult) {
-        console.log("items filters set");
-
         // dialogResult is of type FilterSelected from now on, since it is not false
         this.filtersSelected = dialogResult;
 
         console.log("SELECTED FILTERS: ");
         console.log(this.filtersSelected);
-
+        this.refreshDataSource();
       }
     })
   }

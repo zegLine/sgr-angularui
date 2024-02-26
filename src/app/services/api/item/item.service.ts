@@ -6,6 +6,7 @@ import {StoreApiModel} from "../../../models/api/store/store-api-model";
 import {StorePageApiModel} from "../../../models/api/store/store-page-api-model";
 import {ItemApiModel} from "../../../models/api/item/item-api-model";
 import {ItemPageApiModel} from "../../../models/api/item/item-page-api-model";
+import {SGRFilterSelected} from "../../../models/filter/filter_selected";
 
 @Injectable({
   providedIn: 'root'
@@ -23,14 +24,17 @@ export class ItemService {
     return this.apiService.callApi(`${this.baseUrl}/nou`, 'POST', body, null, null);
   }
 
-  getAllItems(pageSize: number, pageNumber: number, sortingColumn?: string, sortingDirection?: string): Observable<HttpResponse<ItemPageApiModel>> {
+  getAllItems(pageSize: number, pageNumber: number, sortingColumn?: string, sortingDirection?: string, filtersSelected?: SGRFilterSelected[]): Observable<HttpResponse<ItemPageApiModel>> {
     const params = {
       pageNumber: pageNumber,
       pageSize: pageSize,
       ...(sortingColumn && { sortingColumn }),
       ...(sortingDirection && { sortingDirection })
     }
-    return this.apiService.callApi(`${this.baseUrl}/toate`, 'GET', null, null, params);
+    const body = {
+      filtersSelected: filtersSelected
+    }
+    return this.apiService.callApi(`${this.baseUrl}/toate`, 'POST', body, {'Content-Type': 'application/JSON'}, params);
   }
 
   deleteItem(storeId: string): Observable<HttpResponse<string>> {
