@@ -133,18 +133,8 @@ export class ItemComponent implements OnInit, AfterViewInit {
         console.log("items filters set");
 
         // dialogResult is of type FilterSelected from now on, since it is not false
+        this.filtersSelected = dialogResult;
 
-        this.filtersSelected = [];
-        // Loop through each filter in dialogResult and add to filtersSelected if predicate is not 0
-        dialogResult.forEach((filter, index: number) => {
-          if (filter.predicate !== 0) {
-            this.filtersSelected.push({
-              filter: this.filters[index],
-              predicate: filter.predicate,
-              value: filter.value
-            });
-          }
-        });
         console.log("SELECTED FILTERS: ");
         console.log(this.filtersSelected);
 

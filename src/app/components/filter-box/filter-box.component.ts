@@ -13,11 +13,12 @@ import {FormsModule} from "@angular/forms";
 import {SGRFiterType} from "../../models/filter/filter_type";
 import {MatFormFieldModule} from "@angular/material/form-field";
 import {MatOption, MatSelect} from "@angular/material/select";
-import {MatButton} from "@angular/material/button";
+import {MatButton, MatIconButton} from "@angular/material/button";
 import {MatInput} from "@angular/material/input";
 import {StringFilterPredicates} from "../../models/filter/predicates/string_filter_predicates";
 import {NumericFilterPredicates} from "../../models/filter/predicates/numeric_filter_predicates";
 import {SGRFilterSelected} from "../../models/filter/filter_selected";
+import {MatIcon} from "@angular/material/icon";
 
 @Component({
   selector: 'app-filter-box',
@@ -33,7 +34,9 @@ import {SGRFilterSelected} from "../../models/filter/filter_selected";
     MatInput,
     MatDialogContent,
     MatDialogActions,
-    MatDialogTitle
+    MatDialogTitle,
+    MatIcon,
+    MatIconButton
   ],
   templateUrl: './filter-box.component.html',
   styleUrl: './filter-box.component.css'
@@ -47,7 +50,7 @@ export class FilterBoxComponent {
   }
 
   onConfirm() {
-    this.dialogRef.close(this.filtersSelected);
+    this.dialogRef.close(this.reduceUnusedFilters(this.filtersSelected));
   }
 
   onDismiss() {
@@ -55,6 +58,12 @@ export class FilterBoxComponent {
   }
 
   protected readonly SGRFiterType = SGRFiterType;
+
+  reduceUnusedFilters(filtersSelected: SGRFilterSelected[]): SGRFilterSelected[] {
+    return filtersSelected.filter(filterSelected => {
+      return filterSelected.predicate !== 0 && filterSelected.value !== '';
+    });
+  }
 
   initializeFiltersSelected(filtersSelectedAlready: SGRFilterSelected[]) {
     this.filtersSelected = this.filters.map((filter, index) => {
@@ -70,6 +79,11 @@ export class FilterBoxComponent {
         };
       }
     });
+  }
+
+  clearFilter(index: number): void {
+    this.filtersSelected[index].predicate = 0;
+    this.filtersSelected[index].value = '';
   }
 }
 
