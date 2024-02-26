@@ -11,6 +11,7 @@ import {ItemComponent} from "./components/item/item.component";
 import {ItemnouComponent} from "./components/itemnou/itemnou.component";
 import {UsersComponent} from "./components/users/users.component";
 import {UsernouComponent} from "./components/usernou/usernou.component";
+import {UsereditComponent} from "./components/useredit/useredit.component";
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -25,5 +26,6 @@ export const routes: Routes = [
   {path: 'item/nou', component: ItemnouComponent},
   {path: 'user', component: UsersComponent},
   {path: 'user/nou', component: UsernouComponent},
+  {path: 'user/:id/edit', component: UsereditComponent},
   {path: '', redirectTo: '/start', pathMatch: "full"}
 ];
