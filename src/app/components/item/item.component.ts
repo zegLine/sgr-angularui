@@ -57,9 +57,9 @@ export class ItemComponent implements OnInit, AfterViewInit {
   sortingColumn: string = "";
   sortingDirection: string = "";
 
-  filters: SGRFilter[] = [{column_name: "id", filter_type: SGRFiterType.STRING},
-                          {column_name: "itemName", filter_type: SGRFiterType.STRING},
-                          {column_name: "itemWeightKg", filter_type: SGRFiterType.NUMERIC}];
+  filters: SGRFilter[] = [{filter_name: 'Id', column_name: "id", filter_type: SGRFiterType.STRING},
+                          {filter_name: 'Name', column_name: "itemName", filter_type: SGRFiterType.STRING},
+                          {filter_name: 'Weight (kg)', column_name: "itemWeightKg", filter_type: SGRFiterType.NUMERIC}];
   filtersSelected: SGRFilterSelected[] = [];
 
   @ViewChild(MatPaginator) paginator: MatPaginator = new MatPaginator(new MatPaginatorIntl(), ChangeDetectorRef.prototype);

@@ -2,7 +2,7 @@
 <mat-dialog-content>
   <div *ngFor="let filter of filters; let i = index" class="filter-item">
     <mat-form-field>
-      <mat-label>{{ filter.column_name }}</mat-label>
+      <mat-label>{{ filter.filter_name }}</mat-label>
       <mat-select [(ngModel)]="filtersSelected[i].predicate">
           <mat-option *ngIf="filter.filter_type === SGRFiterType.NUMERIC" value="GREATER_THAN">Greater than</mat-option>
           <mat-option *ngIf="filter.filter_type === SGRFiterType.NUMERIC" value="LESS_THAN">Less than</mat-option>
