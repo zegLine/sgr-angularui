@@ -31,9 +31,7 @@ export class ItemService {
       ...(sortingColumn && { sortingColumn }),
       ...(sortingDirection && { sortingDirection })
     }
-    const body = {
-      filtersSelected: filtersSelected
-    }
+    const body = filtersSelected;
     return this.apiService.callApi(`${this.baseUrl}/toate`, 'POST', body, {'Content-Type': 'application/JSON'}, params);
   }
 
