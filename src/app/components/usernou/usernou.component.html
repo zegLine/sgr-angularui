@@ -1,1 +1,12 @@
-<p>usernou works!</p>
+<h1>Adauga utilizator nou</h1>
+<mat-form-field>
+  <mat-label>Nume utilizator</mat-label>
+  <input matInput [(ngModel)]="username" type="text">
+</mat-form-field>
+<mat-form-field>
+  <mat-label>Parola</mat-label>
+  <input matInput [(ngModel)]="password" type="password">
+</mat-form-field>
+<button mat-raised-button (click)="createUser(false)">Adauga si ramai</button>
+<button mat-raised-button (click)="createUser(true)">Adauga si inapoi</button>
+
