@@ -4,6 +4,7 @@
 <button mat-fab color="secondary" aria-label="Filters" (click)="openFilters()">
   <mat-icon>filter_list</mat-icon>
 </button>
+<app-filter-chips [filtersSelected]="filtersSelected" (removeFilter)="removeFilter($event)"></app-filter-chips>
 <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortChange($event)">
 
   <ng-container matColumnDef="actions">

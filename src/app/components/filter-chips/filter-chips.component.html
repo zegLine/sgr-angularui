@@ -1,0 +1,8 @@
+<div>
+    <mat-chip *ngFor="let filter of filtersSelected">
+      {{ filter.filter.filter_name }}
+      {{ filter.predicate }}
+      {{ filter.value }}
+      <mat-icon (click)="this.removeFilter.emit(filter)">cancel</mat-icon>
+    </mat-chip>
+</div>

@@ -25,6 +25,7 @@ import {SGRFiterType} from "../../models/filter/filter_type";
 import {FilterBoxComponent} from "../filter-box/filter-box.component";
 import {filter} from "rxjs";
 import {SGRFilterSelected} from "../../models/filter/filter_selected";
+import {FilterChipsComponent} from "../filter-chips/filter-chips.component";
 
 @Component({
   selector: 'app-item',
@@ -46,7 +47,8 @@ import {SGRFilterSelected} from "../../models/filter/filter_selected";
     RouterLink,
     MatHeaderCellDef,
     MatSort,
-    MatSortHeader
+    MatSortHeader,
+    FilterChipsComponent
   ],
   templateUrl: './item.component.html',
   styleUrl: './item.component.css'
@@ -138,5 +140,17 @@ export class ItemComponent implements OnInit, AfterViewInit {
         this.refreshDataSource();
       }
     })
+  }
+
+  removeFilter(filterToRemove: SGRFilterSelected) {
+    // Use filter method to create a new array without the filter to remove
+    this.filtersSelected = this.filtersSelected.filter(filter =>
+      !(filter.filter.filter_name === filterToRemove.filter.filter_name &&
+        filter.predicate === filterToRemove.predicate &&
+        filter.value === filterToRemove.value)
+    );
+
+    // Refresh the data source after removing the filter
+    this.refreshDataSource();
   }
 }
