@@ -1,0 +1,7 @@
+@use '@angular/material' as mat;
+
+$pal: mat.define-palette(mat.$indigo-palette);
+
+.user-roles-selector {
+  background-color: #424242;
+}

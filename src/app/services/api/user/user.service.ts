@@ -9,12 +9,14 @@ import {ItemPageApiModel} from "../../../models/api/item/item-page-api-model";
 import {SGRFilterSelected} from "../../../models/filter/filter_selected";
 import {UserApiModel} from "../../../models/api/user/user-api-model";
 import {UserPageApiModel} from "../../../models/api/user/user-page-api-model";
+import {SgrroleApiModel} from "../../../models/api/user/sgrrole-api-model";
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
   private baseUrl = '/user';
+  private baseUrlRoles = '/role';
 
   constructor(private apiService: ApiService) {}
 
@@ -38,5 +40,13 @@ export class UserService {
 
   deleteUser(userId: string): Observable<HttpResponse<UserApiModel>> {
     return this.apiService.callApi(`${this.baseUrl}/${userId}/delete`, 'DELETE', null, null, null);
+  }
+
+  getUserDetails(userId: string): Observable<HttpResponse<UserApiModel>> {
+    return this.apiService.callApi(`${this.baseUrl}/${userId}/details`, 'GET', null, null, null);
+  }
+
+  getAllRoles() : Observable<HttpResponse<SgrroleApiModel[]>> {
+    return this.apiService.callApi(`${this.baseUrlRoles}/toate`, 'GET', null, null, null);
   }
 }

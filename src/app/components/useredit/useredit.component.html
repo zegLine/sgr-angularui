@@ -1,1 +1,19 @@
-<p>useredit works!{{userId}}</p>
+<h1>Edit user {{user.username}}</h1>
+
+<mat-form-field [floatLabel]="floatLabelControl">
+  <mat-label>Username</mat-label>
+  <input matInput [disabled]="true" [value]="user.username">
+  <mat-hint align="start">Read only</mat-hint>
+</mat-form-field>
+
+<mat-form-field [floatLabel]="floatLabelControl">
+  <mat-label>User ID</mat-label>
+  <input matInput [disabled]="true" [value]="user.id">
+  <mat-hint align="start">Read only</mat-hint>
+</mat-form-field>
+
+<div class="user-roles-selector">
+  @for (roleSelection of allRolesSelection; track roleSelection) {
+  <mat-checkbox [(ngModel)]="roleSelection.selected">{{roleSelection.role.name}}</mat-checkbox>
+}
+</div>
