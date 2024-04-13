@@ -19,4 +19,8 @@ export class RoleService {
   deleteRole(id: number): Observable<HttpResponse<SgrroleApiModel>> {
     return this.apiService.callApi(`${this.baseUrl}/${id}/delete`, 'DELETE', null, null, null);
   }
+
+  createRole(name: string): Observable<HttpResponse<SgrroleApiModel>> {
+    return this.apiService.callApi(`${this.baseUrl}/nou`, 'POST', {name: name}, null, null);
+  }
 }

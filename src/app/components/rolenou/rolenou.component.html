@@ -1,0 +1,9 @@
+<h1>Adauga rol nou</h1>
+<mat-form-field>
+  <mat-label>Nume rol</mat-label>
+  <input matInput [(ngModel)]="name" type="text">
+</mat-form-field>
+
+<button mat-raised-button (click)="createRole(false)">Adauga si ramai</button>
+<button mat-raised-button (click)="createRole(true)">Adauga si inapoi</button>
+
