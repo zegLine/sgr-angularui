@@ -4,7 +4,7 @@ import {MatToolbar} from "@angular/material/toolbar";
 import {RouterLink} from "@angular/router";
 import {AuthServiceService} from "../../services/auth-service/auth-service.service";
 import {NgIf} from "@angular/common";
-import {MatMenu, MatMenuTrigger} from "@angular/material/menu";
+import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatIconModule} from "@angular/material/icon";
 
 @Component({
@@ -18,7 +18,8 @@ import {MatIconModule} from "@angular/material/icon";
     MatMenu,
     MatIconButton,
     MatMenuTrigger,
-    MatIconModule
+    MatIconModule,
+    MatMenuItem
   ],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'

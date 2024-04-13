@@ -5,7 +5,8 @@
   <button *ngIf="(authService.isLoggedIn())" mat-button routerLink="/item">Produse</button>
   <button *ngIf="(authService.isLoggedIn())" mat-button routerLink="/purchase">Achizitii SGR</button>
   <mat-menu #managementMenu="matMenu">
-    <button *ngIf="(authService.isLoggedIn())" mat-button routerLink="/user">Utilizatori SGR</button>
+    <button *ngIf="(authService.isLoggedIn())" mat-menu-item routerLink="/user">Utilizatori SGR</button>
+    <button *ngIf="(authService.isLoggedIn())" mat-menu-item routerLink="/role">Roluri SGR</button>
   </mat-menu>
   <button *ngIf="(authService.isLoggedIn())" mat-button [matMenuTriggerFor]="managementMenu">
     Management SGR
