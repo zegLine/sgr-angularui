@@ -23,4 +23,8 @@ export class RoleService {
   createRole(name: string): Observable<HttpResponse<SgrroleApiModel>> {
     return this.apiService.callApi(`${this.baseUrl}/nou`, 'POST', {name: name}, null, null);
   }
+
+  getRoleDetails(roleId: string): Observable<HttpResponse<SgrroleApiModel>> {
+    return this.apiService.callApi(`${this.baseUrl}/${roleId}/details`, 'GET', null, null, null);
+  }
 }

@@ -14,6 +14,7 @@ import {UsernouComponent} from "./components/usernou/usernou.component";
 import {UsereditComponent} from "./components/useredit/useredit.component";
 import {RolesComponent} from "./components/roles/roles.component";
 import {RolenouComponent} from "./components/rolenou/rolenou.component";
+import {RoleeditComponent} from "./components/roleedit/roleedit.component";
 
 export const routes: Routes = [
   {path: 'login', component: LoginComponent},
@@ -31,5 +32,6 @@ export const routes: Routes = [
   {path: 'user/:id/edit', component: UsereditComponent},
   {path: 'role', component: RolesComponent},
   {path: 'role/nou', component: RolenouComponent},
+  {path: 'role/:id/edit', component: RoleeditComponent},
   {path: '', redirectTo: '/start', pathMatch: "full"}
 ];
