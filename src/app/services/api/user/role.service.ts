@@ -31,4 +31,8 @@ export class RoleService {
   setRolePrivileges(roleId: string, privileges: string[]): Observable<HttpResponse<SgrroleApiModel>> {
     return this.apiService.callApi(`${this.baseUrl}/${roleId}/privilegii`, 'PUT', {privileges: privileges}, null, null);
   }
+
+  deletePrivilegeFromRole(roleId: string, privilege: string): Observable<HttpResponse<SgrroleApiModel>> {
+    return this.apiService.callApi(`${this.baseUrl}/${roleId}/privilegii`, 'DELETE', {privilege: privilege}, null, null);
+  }
 }
