@@ -6,13 +6,20 @@ import {SgrroleApiModel} from "../../models/api/user/sgrrole-api-model";
 import {ActivatedRoute} from "@angular/router";
 import {RoleService} from "../../services/api/user/role.service";
 import {MatInput} from "@angular/material/input";
+import {MatList, MatListItem} from "@angular/material/list";
+import {MatLine} from "@angular/material/core";
+import {NgForOf} from "@angular/common";
 
 @Component({
   selector: 'app-roleedit',
   standalone: true,
   imports: [
     MatFormFieldModule,
-    MatInput
+    MatInput,
+    MatList,
+    MatListItem,
+    MatLine,
+    NgForOf
   ],
   templateUrl: './roleedit.component.html',
   styleUrl: './roleedit.component.css'

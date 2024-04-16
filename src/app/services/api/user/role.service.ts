@@ -27,4 +27,8 @@ export class RoleService {
   getRoleDetails(roleId: string): Observable<HttpResponse<SgrroleApiModel>> {
     return this.apiService.callApi(`${this.baseUrl}/${roleId}/details`, 'GET', null, null, null);
   }
+
+  setRolePrivileges(roleId: string, privileges: string[]): Observable<HttpResponse<SgrroleApiModel>> {
+    return this.apiService.callApi(`${this.baseUrl}/${roleId}/privilegii`, 'PUT', {privileges: privileges}, null, null);
+  }
 }

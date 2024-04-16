@@ -11,3 +11,9 @@
   <input matInput [disabled]="true" [value]="role.id">
   <mat-hint>Read only</mat-hint>
 </mat-form-field>
+
+<mat-list role="list">
+  <mat-list-item role="listitem" *ngFor="let privilege of role.privileges">
+    <h4 mat-line>{{privilege.name}}</h4>
+  </mat-list-item>
+</mat-list>
