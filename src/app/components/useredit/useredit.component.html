@@ -1,4 +1,4 @@
-<h1>Edit user {{user.username}}</h1>
+<h1>Editeaza utilizatorul {{user.username}}</h1>
 
 <mat-form-field [floatLabel]="floatLabelControl">
   <mat-label>Username</mat-label>
@@ -17,3 +17,5 @@
   <mat-checkbox [(ngModel)]="roleSelection.selected">{{roleSelection.role.name}}</mat-checkbox>
 }
 </div>
+
+<button mat-raised-button (click)="save()">Save</button>

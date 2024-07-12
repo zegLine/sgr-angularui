@@ -7,6 +7,9 @@ import {MatInput} from "@angular/material/input";
 import {FormControl, FormsModule} from "@angular/forms";
 import {MatCheckbox} from "@angular/material/checkbox";
 import {SgrroleApiModel} from "../../models/api/user/sgrrole-api-model";
+import {MatButton} from "@angular/material/button";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {NotifyUtils} from "../../utils/notify/notifyUtils";
 
 export interface SGRRoleSelection {
   role: SgrroleApiModel,
@@ -20,7 +23,8 @@ export interface SGRRoleSelection {
     MatFormFieldModule,
     MatInput,
     MatCheckbox,
-    FormsModule
+    FormsModule,
+    MatButton
   ],
   templateUrl: './useredit.component.html',
   styleUrl: './useredit.component.css'
@@ -32,7 +36,7 @@ export class UsereditComponent implements OnInit, OnDestroy {
   user!: UserApiModel;
   allRolesSelection!: SGRRoleSelection[];
 
-  constructor(private route: ActivatedRoute, private userService: UserService) {
+  constructor(private route: ActivatedRoute, private userService: UserService, private notifyUtils: NotifyUtils){
   }
 
   ngOnInit(): void {
@@ -57,5 +61,17 @@ export class UsereditComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.sub.unsubscribe();
+  }
+
+  save() {
+    this.userService.setRolesForUser(this.userId, this.allRolesSelection.filter(role => role.selected).map(role => role.role)).subscribe(
+      (data) => {
+      console.log(data.body);
+      this.notifyUtils.openSnackBarStatusCode(data.status);
+    },
+      (error) => {
+      console.log(error);
+      this.notifyUtils.openSnackBarStatusCode(error.status);
+    })
   }
 }

@@ -10,6 +10,7 @@ import {SGRFilterSelected} from "../../../models/filter/filter_selected";
 import {UserApiModel} from "../../../models/api/user/user-api-model";
 import {UserPageApiModel} from "../../../models/api/user/user-page-api-model";
 import {SgrroleApiModel} from "../../../models/api/user/sgrrole-api-model";
+import {SGRRoleSelection} from "../../../components/useredit/useredit.component";
 
 @Injectable({
   providedIn: 'root'
@@ -48,5 +49,9 @@ export class UserService {
 
   getAllRoles() : Observable<HttpResponse<SgrroleApiModel[]>> {
     return this.apiService.callApi(`${this.baseUrlRoles}/toate`, 'GET', null, null, null);
+  }
+
+  setRolesForUser(userId:string, roles: SgrroleApiModel[]): Observable<HttpResponse<UserApiModel>> {
+    return this.apiService.callApi(`${this.baseUrl}/${userId}/roluri`, 'PUT', roles.map(role => role.id), null, null);
   }
 }
