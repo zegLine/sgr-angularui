@@ -21,6 +21,7 @@ import {
   MatHeaderRow, MatHeaderRowDef, MatRow, MatRowDef,
   MatTable
 } from "@angular/material/table";
+import {NotifyUtils} from "../../utils/notify/notifyUtils";
 
 @Component({
   selector: 'app-roleedit',
@@ -57,7 +58,7 @@ export class RoleeditComponent implements OnInit, OnDestroy {
   role!: SgrroleApiModel;
   privilegesSelection!: SgrprivilegeApiModel[];
   displayedColumns: string[] = ['actions', 'id', 'name'];
-  constructor(private route: ActivatedRoute, private roleService: RoleService, private changeDetectorRefs: ChangeDetectorRef) {
+  constructor(private route: ActivatedRoute, private roleService: RoleService, private changeDetectorRefs: ChangeDetectorRef, private notifyUtils: NotifyUtils) {
   }
 
   ngOnDestroy(): void {
@@ -77,10 +78,17 @@ export class RoleeditComponent implements OnInit, OnDestroy {
   }
 
   saveChanges() {
-  this.roleService.setRolePrivileges(this.roleId, this.privilegesSelection.map((privilege) => privilege.name)).subscribe((data) => {
+  this.roleService.setRolePrivileges(this.roleId, this.privilegesSelection.map((privilege) => privilege.name)).subscribe(
+    (data) => {
       this.role = data.body!;
       this.privilegesSelection = this.role.privileges;
       this.changeDetectorRefs.detectChanges();
+
+      this.notifyUtils.openSnackBarStatusCode(data.status);
+    },
+    (error) => {
+      console.log(error);
+      this.notifyUtils.openSnackBarStatusCode(error.status);
     });
   }
 
